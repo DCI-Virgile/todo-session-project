@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>server interface</h1>
+
+    <form id="submitSeries" action="submit" onsubmit="return false">
+      add series <br />
+      series title: <input id="title" type="text" /> <br />
+      <button>submit</button>
+    </form>
+    <br /><br />
+    <form id="submitSeason" action="submit" onsubmit="return false">
+      add season <br />
+      series ID: <input id="seriesID" type="text" /> <br />
+      series ref: <input id="seriesRef" type="text" /> <br />
+      season's number: <input id="sNum" type="text" /> <br />
+      <button>submit</button>
+    </form>
+    <br /><br />
+    <form id="submitEpisode" action="submit" onsubmit="return false">
+      add episode <br />
+      season ID: <input id="seasonID" type="text" /> <br />
+      season ref: <input id="seasonRef" type="text" /> <br />
+      episode's number: <input id="eNum" type="text" /> <br />
+      <button>submit</button>
+    </form>
+    <br /><br />
+    <script src="./index.js"></script>
+  </body>
+</html>

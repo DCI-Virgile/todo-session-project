@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>server interface</h1>
+
+    <form id="submitUser" action="submit" onsubmit="return false">
+      add user <br />
+      username: <input id="name" type="text" /> <br />
+      email: <input id="email" type="text" /> <br />
+      password: <input id="password" type="text" /> <br />
+      <button>submit</button>
+    </form>
+    <br /><br />
+    <form id="submitTodo" action="submit" onsubmit="return false">
+      add todo <br />
+      user ID: <input id="userID" type="text" /> <br />
+      username: <input id="user" type="text" /> <br />
+      title: <input id="title" type="text" /> <br />
+      description: <input id="description" type="text" /> <br />
+      status: <input id="status" type="text" /> <br />
+      <button>submit</button>
+    </form>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
