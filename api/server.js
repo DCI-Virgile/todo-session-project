@@ -33,10 +33,13 @@ mongoose
 const middleware = require("./middleware");
 const read = require("./routes/read");
 const create = require("./routes/create");
+const login = require("./routes/login");
 
 api.use(middleware.cors);
+api.use(middleware.sesh);
 api.use(read);
 api.use(create);
+api.use(login);
 
 /** EXPORT PATH */
 module.exports = api;
