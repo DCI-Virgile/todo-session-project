@@ -16,9 +16,12 @@ router.post("/login", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   console.log(email);
+  console.log(password);
   User.find({ email: email }).then(user => {
-    if (password === user.password) {
-      req.session.user = user.name;
+    console.log(user[0]);
+    if (password === user[0].password) {
+      req.session.user = user[0].id;
+      console.log(req.session.user);
       res.send({ success: true });
     } else {
       res.send({ success: false });

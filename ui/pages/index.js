@@ -1,62 +1,71 @@
-const submitSeries = document.querySelector("#submitSeries");
-const title = document.querySelector("#title");
-const img = document.querySelector("#img");
+import { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
-const submitSeason = document.querySelector("#submitSeason");
-const seriesID = document.querySelector("#seriesID");
-const seriesRef = document.querySelector("#seriesRef");
-const sNum = document.querySelector("#sNum");
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-const submitEpisode = document.querySelector("#submitEpisode");
-const seasonID = document.querySelector("#seasonID");
-const seasonRef = document.querySelector("#seasonRef");
-const eNum = document.querySelector("#eNum");
+  const useStyles = makeStyles(theme => ({
+    root: {
+      "& .MuiTextField-root": {
+        margin: theme.spacing(1),
+        width: 200
+      },
+      "& > *": {
+        margin: theme.spacing(1)
+      }
+    }
+  }));
 
-const postSeries = () => {
-  const ref = title.value
-    .split(" ")
-    .join("")
-    .toLowerCase();
-  fetch("/series", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title: title.value,
-      img: ref + ".jpg",
-      ref: ref
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    fetch("http://localhost:3200/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
     })
-  });
-  console.log("series submited");
-};
+      .then(res => res.json())
+      .then(data => console.log(data));
+    console.log("user submited");
+  }
 
-const postSeason = () => {
-  fetch("seasons", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      num: sNum.value,
-      ref: `${seriesRef.value}_s${sNum.value}`,
-      seriesID: seriesID.value
-    })
-  });
-  console.log("season submited");
-};
+  const classes = useStyles();
 
-const postEpisodes = () => {
-  fetch("episodes", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      num: eNum.value,
-      ref: `${seasonRef.value}_e${eNum.value}`,
-      vid: `${seasonRef.value}_e${eNum.value}.mp4`,
-      seasonID: seasonID.value
-    })
-  });
+  return (
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        required
+        id="outlined-required"
+        label="Email"
+        defaultValue=""
+        variant="outlined"
+        onChange={e => setEmail(e.target.value)}
+      />
+      <TextField
+        id="outlined-password-input"
+        label="Password"
+        type="password"
+        autoComplete="current-password"
+        variant="outlined"
+        onChange={e => setPassword(e.target.value)}
+      />
+      <Button variant="outlined" type="submit">
+        Submit
+      </Button>
+    </form>
+  );
+}
 
-  console.log("episodes submited");
-};
-
-submitSeries.addEventListener("submit", postSeries);
-submitSeason.addEventListener("submit", postSeason);
-submitEpisode.addEventListener("submit", postEpisodes);
+export default Login;
